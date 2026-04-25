@@ -30,8 +30,9 @@ public class PacienteController {
     }
 
     @GetMapping("/historico")
-    public ResponseEntity<List<Paciente>> listarHistorico() {
-        return ResponseEntity.ok(sistema.listarHistorico());
+    public ResponseEntity<List<Paciente>> listarHistorico(
+            @RequestParam(required = false, defaultValue = "entrada") String ordenar) {
+        return ResponseEntity.ok(sistema.listarHistoricoOrdenado(ordenar));
     }
 
     @GetMapping("/{id}")
@@ -60,9 +61,13 @@ public class PacienteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removerPaciente(@PathVariable int id) {
+    public ResponseEntity<Map<String, Object>> removerPaciente(@PathVariable int id) {
+        Paciente paciente = sistema.buscarPaciente(id);
+        if (paciente == null) {
+            return ResponseEntity.notFound().build();
+        }
         sistema.removerPaciente(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(Map.of("sucesso", true, "id", id));
     }
 
     @PostMapping("/desfazer")
@@ -72,6 +77,24 @@ public class PacienteController {
             return ResponseEntity.ok(Map.of("mensagem", "Operacao desfeita com sucesso"));
         }
         return ResponseEntity.badRequest().body(Map.of("mensagem", "Nenhuma operacao para desfazer"));
+    }
+
+    @PostMapping("/refazer")
+    public ResponseEntity<Map<String, String>> refazer() {
+        boolean sucesso = sistema.refazerUltimaOperacao();
+        if (sucesso) {
+            return ResponseEntity.ok(Map.of("mensagem", "Operacao refeita com sucesso"));
+        }
+        return ResponseEntity.badRequest().body(Map.of("mensagem", "Nenhuma operacao para refazer"));
+    }
+
+    @DeleteMapping("/historico")
+    public ResponseEntity<Map<String, Object>> limparHistorico() {
+        sistema.limparHistorico();
+        return ResponseEntity.ok(Map.of(
+                "sucesso", true,
+                "mensagem", "Histórico limpo com sucesso"
+        ));
     }
 
     @GetMapping("/estatisticas")

@@ -1,0 +1,10 @@
+=== SISTEMA HOSPITALAR - DADOS PERSISTIDOS ===
+PROXIMO_ID=01
+
+--- FILA NORMAL ---
+[Vazia]
+
+--- FILA PRIORITARIA ---
+[Vazia]
+
+--- HISTORICO ---

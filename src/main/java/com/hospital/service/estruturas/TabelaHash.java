@@ -44,6 +44,8 @@ public class TabelaHash {
     public void remover(int id) {
         int indice = funcaoHash(id);
         EntradaHash atual = tabela[indice];
+        if (atual == null) return;
+
         EntradaHash anterior = null;
         while (atual != null) {
             if (atual.getChave() == id) {

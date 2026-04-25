@@ -77,10 +77,49 @@ public class HeapPrioridade {
         return isEmpty() ? null : heap.get(0);
     }
 
+    public void inserirNoFim(Paciente paciente) {
+        heap.add(paciente);
+    }
+
+    public Paciente removerPorId(int id) {
+        for (int i = 0; i < heap.size(); i++) {
+            if (heap.get(i).getId() == id) {
+                Paciente removido = heap.remove(i);
+                if (heap.isEmpty()) {
+                    return removido;
+                }
+                if (i < heap.size()) {
+                    if (i > 0 && temMaiorPrioridade(heap.get(i), heap.get(getPai(i)))) {
+                        heapifyUp(i);
+                    } else {
+                        heapifyDown(i);
+                    }
+                }
+                return removido;
+            }
+        }
+        return null;
+    }
+
     public boolean isEmpty() { return heap.isEmpty(); }
     public int getTamanho() { return heap.size(); }
 
     public List<Paciente> listarTodos() {
         return new ArrayList<>(heap);
+    }
+
+    // Método para inserir um paciente mantendo a ordem de prioridade original
+    public void inserirMantendoPosicao(Paciente paciente, int posicaoOriginal) {
+        // Reconstrói o heap com todos os pacientes, inserindo o novo mantendo ordem
+        heap.add(posicaoOriginal < heap.size() ? posicaoOriginal : heap.size(), paciente);
+        // Reorganiza o heap para manter a propriedade de heap
+        reconstruirHeap();
+    }
+
+    // Reconstrói o heap inteiro
+    private void reconstruirHeap() {
+        for (int i = heap.size() / 2 - 1; i >= 0; i--) {
+            heapifyDown(i);
+        }
     }
 }

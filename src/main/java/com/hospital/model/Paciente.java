@@ -1,8 +1,5 @@
 package com.hospital.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Paciente {
     private int id;
     private String nome;
@@ -11,16 +8,14 @@ public class Paciente {
     private String telefone;
     private String endereco;
     private String prioridade;
+    private boolean removido;
 
-    @JsonCreator
-    public Paciente(
-            @JsonProperty("id") int id,
-            @JsonProperty("nome") String nome,
-            @JsonProperty("idade") int idade,
-            @JsonProperty("bi") String bi,
-            @JsonProperty("telefone") String telefone,
-            @JsonProperty("endereco") String endereco,
-            @JsonProperty("prioridade") String prioridade) {
+    public boolean isRemovido() { return removido; }
+    public void setRemovido(boolean removido) { this.removido = removido; }
+
+    public Paciente() {}
+
+    public Paciente(int id, String nome, int idade, String bi, String telefone, String endereco, String prioridade) {
         this.id = id;
         this.nome = nome;
         this.idade = idade;
@@ -29,8 +24,6 @@ public class Paciente {
         this.endereco = endereco;
         this.prioridade = prioridade;
     }
-
-    public Paciente() {}
 
     public int getId() { return id; }
     public String getNome() { return nome; }

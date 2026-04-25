@@ -3,11 +3,20 @@ const API_BASE = '/api';
 async function fetchJSON(url, options = {}) {
     try {
         const response = await fetch(url, options);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
         const text = await response.text();
-        return text ? JSON.parse(text) : null;
+        if (!response.ok) {
+            const message = text || response.statusText || `HTTP ${response.status}`;
+            throw new Error(message);
+        }
+        if (!text) {
+            return null;
+        }
+        try {
+            return JSON.parse(text);
+        } catch (parseError) {
+            console.error('Falha ao parsear JSON:', text, parseError);
+            return null;
+        }
     } catch (error) {
         console.error('Erro:', error);
         return null;
@@ -27,7 +36,9 @@ async function atualizarEstatisticas() {
         document.getElementById('statNormal').textContent = stats.filaNormalSize;
         document.getElementById('statPrioritaria').textContent = stats.filaPrioritariaSize;
         document.getElementById('statAtendidos').textContent = stats.totalAtendidos;
-        document.getElementById('statUndo').textContent = stats.operacoesUndo;
+        // Total de pacientes = fila normal + fila prioritária
+        const totalPacientes = stats.filaNormalSize + stats.filaPrioritariaSize;
+        document.getElementById('statTotal').textContent = totalPacientes;
     }
 }
 
@@ -38,22 +49,47 @@ async function renderizarListas() {
         fetchJSON(`${API_BASE}/pacientes/historico`)
     ]);
 
-    renderLista('filaNormal', filaNormal || []);
-    renderLista('filaPrioritaria', filaPrioritaria || [], true);
-    renderLista('historico', historico || []);
+    if (filaNormal) renderLista('filaNormal', filaNormal);
+    if (filaPrioritaria) renderLista('filaPrioritaria', filaPrioritaria, true);
+    if (historico) {
+        selectionSortPacientes(historico);
+        renderLista('historico', historico);
+    }
+}
+
+function selectionSortPacientes(pacientes) {
+    for (let i = 0; i < pacientes.length - 1; i++) {
+        let minIndex = i;
+        for (let j = i + 1; j < pacientes.length; j++) {
+            if (pacientes[j].id < pacientes[minIndex].id) {
+                minIndex = j;
+            }
+        }
+        if (minIndex !== i) {
+            const temp = pacientes[i];
+            pacientes[i] = pacientes[minIndex];
+            pacientes[minIndex] = temp;
+        }
+    }
 }
 
 function renderLista(id, pacientes, isPrioritaria = false) {
     const ul = document.getElementById(id);
     ul.innerHTML = '';
-    if (pacientes.length === 0) {
+    if (!pacientes || pacientes.length === 0) {
         ul.innerHTML = '<li style="color:#666;font-style:italic;">Vazio</li>';
         return;
     }
     pacientes.forEach(p => {
         const li = document.createElement('li');
-        li.className = isPrioritaria || p.idade >= 60 ? 'prioritario' : '';
-        li.textContent = `#${p.id} - ${p.nome} (${p.idade} anos)`;
+        li.className = (isPrioritaria || p.idade >= 60) ? 'prioritario' : '';
+        let text = `#${p.id} - ${p.nome} (${p.idade} anos)`;
+        if (p.removido) {
+            text += ' [REMOVIDO]';
+            li.style.color = '#999';
+            li.style.textDecoration = 'line-through';
+        }
+        li.textContent = text;
         ul.appendChild(li);
     });
 }
@@ -100,6 +136,14 @@ async function desfazer() {
     }
 }
 
+async function refazer() {
+    const result = await fetchJSON(`${API_BASE}/pacientes/refazer`, { method: 'POST' });
+    if (result) {
+        showMessage(result.mensagem, result.mensagem.includes('sucesso') ? 'success' : 'error');
+        await Promise.all([atualizarEstatisticas(), renderizarListas()]);
+    }
+}
+
 async function buscarPaciente() {
     const id = prompt('Digite o ID do paciente:');
     if (!id) return;
@@ -114,9 +158,29 @@ async function buscarPaciente() {
 async function removerPaciente() {
     const id = prompt('Digite o ID do paciente a remover:');
     if (!id) return;
-    await fetch(`${API_BASE}/pacientes/${id}`, { method: 'DELETE' });
-    showMessage('Paciente removido', 'info');
+    try {
+        const response = await fetch(`${API_BASE}/pacientes/${id}`, { method: 'DELETE' });
+        if (response.ok) {
+            showMessage('Paciente removido da fila e histórico', 'success');
+        } else if (response.status === 404) {
+            showMessage('Paciente não encontrado na fila', 'error');
+        } else {
+            showMessage('Erro ao remover paciente', 'error');
+        }
+    } catch (error) {
+        showMessage('Erro ao remover paciente', 'error');
+    }
     await Promise.all([atualizarEstatisticas(), renderizarListas()]);
+}
+
+async function limparHistorico() {
+    const result = await fetchJSON(`${API_BASE}/pacientes/historico`, { method: 'DELETE' });
+    if (result && result.sucesso) {
+        showMessage(result.mensagem || 'Histórico limpo com sucesso', 'success');
+        await Promise.all([atualizarEstatisticas(), renderizarListas()]);
+        return;
+    }
+    showMessage('Erro ao limpar histórico', 'error');
 }
 
 atualizarEstatisticas();

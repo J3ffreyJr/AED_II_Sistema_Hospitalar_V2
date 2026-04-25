@@ -19,12 +19,62 @@
 
     <properties>
         <java.version>11</java.version>
+        <!-- CVE fixes for HIGH and CRITICAL severity vulnerabilities -->
+        <!-- CVE-2025-52999, GHSA-72hv-8253-57qq: jackson-core StackOverflow and async parser vulnerabilities -->
+        <jackson.version>2.15.4</jackson.version>
+        <!-- CVE-2022-1471, CVE-2022-25857: snakeyaml RCE and nested depth DoS -->
+        <snakeyaml.version>1.32</snakeyaml.version>
+        <!-- CVE-2023-6378, CVE-2023-6481, CVE-2024-12798, CVE-2025-11226: logback serialization and RCE -->
+        <logback.version>1.2.12</logback.version>
+        <!-- CVE-2026-29145, CVE-2024-50379, CVE-2024-34750: Tomcat client cert auth and HTTP/2 DoS -->
+        <tomcat.version>9.0.117</tomcat.version>
+        <!-- CVE-2016-1000027, CVE-2024-22243, CVE-2024-22262, CVE-2024-38809: Spring unsafe deserialization and URL parsing -->
+        <spring.version>5.3.38</spring.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        
+        <!-- Explicit CVE fixes for vulnerable transitive dependencies -->
+        <!-- CVE-2025-52999, GHSA-72hv-8253-57qq: jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.15.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.15.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>2.15.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.15.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>2.15.4</version>
+        </dependency>
+        
+        <!-- CVE-2016-1000027, CVE-2024-22243, CVE-2024-22262, CVE-2024-38809: Spring Framework -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
     </dependencies>
 

@@ -10,8 +10,10 @@ C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hosp
 C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hospitalar-web\src\main\java\com\hospital\service\estruturas\TabelaHash.java
 C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hospitalar-web\src\main\java\com\hospital\service\estruturas\Fila.java
 C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hospitalar-web\src\main\java\com\hospital\service\estruturas\ListaDuplamenteLigada.java
+C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hospitalar-web\src\main\java\com\hospital\service\estruturas\RegistroOperacao.java
 C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hospitalar-web\src\main\java\com\hospital\model\Atendimento.java
 C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hospitalar-web\src\main\java\com\hospital\model\Paciente.java
+C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hospitalar-web\src\main\java\com\hospital\service\PersistenciaService.java
 C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hospitalar-web\src\main\java\com\hospital\service\estruturas\HeapPrioridade.java
 C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hospitalar-web\src\main\java\com\hospital\service\estruturas\EntradaHash.java
 C:\Users\jeffw\Documents\GitHub\AED_II_Sistema_Hospitalar - Jeffrey\sistema-hospitalar-web\src\main\java\com\hospital\controller\PacienteController.java

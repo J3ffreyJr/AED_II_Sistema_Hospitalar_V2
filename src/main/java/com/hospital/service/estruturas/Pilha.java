@@ -1,22 +1,20 @@
 package com.hospital.service.estruturas;
 
-import com.hospital.model.Paciente;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pilha {
-    private List<Paciente> elementos;
+public class Pilha<T> {
+    private List<T> elementos;
 
     public Pilha() { this.elementos = new ArrayList<>(); }
 
-    public void push(Paciente paciente) { elementos.add(paciente); }
+    public void push(T elemento) { elementos.add(elemento); }
 
-    public Paciente pop() {
+    public T pop() {
         return isEmpty() ? null : elementos.remove(elementos.size() - 1);
     }
 
-    public Paciente peek() {
+    public T peek() {
         return isEmpty() ? null : elementos.get(elementos.size() - 1);
     }
 
@@ -24,5 +22,5 @@ public class Pilha {
     public int getTamanho() { return elementos.size(); }
     public void limpar() { elementos.clear(); }
 
-    public List<Paciente> getElementos() { return new ArrayList<>(elementos); }
+    public List<T> getElementos() { return new ArrayList<>(elementos); }
 }

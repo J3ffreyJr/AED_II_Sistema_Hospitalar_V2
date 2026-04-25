@@ -77,4 +77,10 @@ public class ListaDuplamenteLigada {
         }
         return lista;
     }
+
+    public void limpar() {
+        inicio = null;
+        fim = null;
+        tamanho = 0;
+    }
 }

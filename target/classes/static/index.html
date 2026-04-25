@@ -10,7 +10,7 @@
     <div class="container">
         <header>
             <h1>Sistema Hospitalar</h1>
-            <p class="subtitle">AED II - Backend Spring Boot + Frontend Web</p>
+            <p class="subtitle">AED II</p>
         </header>
 
         <div class="stats-bar">
@@ -27,8 +27,8 @@
                 <span class="stat-value" id="statAtendidos">0</span>
             </div>
             <div class="stat">
-                <span class="stat-label">Undo:</span>
-                <span class="stat-value" id="statUndo">0</span>
+                <span class="stat-label">Total Pacientes:</span>
+                <span class="stat-value" id="statTotal">0</span>
             </div>
         </div>
 
@@ -78,6 +78,7 @@
                     <button class="btn btn-warning" onclick="desfazer()">Desfazer</button>
                     <button class="btn btn-info" onclick="buscarPaciente()">Buscar por ID</button>
                     <button class="btn btn-danger" onclick="removerPaciente()">Remover por ID</button>
+                    <button class="btn btn-secondary" onclick="limparHistorico()">Limpar Histórico</button>
                 </div>
             </section>
 
