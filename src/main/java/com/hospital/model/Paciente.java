@@ -90,6 +90,7 @@ public class Paciente {
     @Override
     public String toString() {
         return "Paciente{id=" + id + ", nome='" + nome + '\'' + ", idade=" + idade + ", bi='" + bi + '\''
-                + ", telefone='" + telefone + '\'' + ", endereco='" + endereco + '\'' + ", prioridade='" + prioridade + '\'' + '}';
+                + ", telefone='" + telefone + '\'' + ", endereco='" + endereco + '\'' + ", prioridade='" + prioridade
+                + '\'' + '}';
     }
 }

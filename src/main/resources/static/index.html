@@ -1,106 +1,118 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema Hospitalar</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>Hospital HeJeGuMi</h1>
-            <p class="subtitle">Sistema de Atendimento Hospitalar</p>
-        </header>
+      <header>
+        <h1>Sistema Hospitalar</h1>
+        <p class="subtitle">AED II</p>
+      </header>
 
-        <div class="stats-bar">
-            <div class="stat">
-                <span class="stat-label">Fila Normal:</span>
-                <span class="stat-value" id="statNormal">0</span>
-            </div>
-            <div class="stat">
-                <span class="stat-label">Fila Prioritária:</span>
-                <span class="stat-value" id="statPrioritaria">0</span>
-            </div>
-            <div class="stat">
-                <span class="stat-label">Atendidos:</span>
-                <span class="stat-value" id="statAtendidos">0</span>
-            </div>
-            <div class="stat">
-                <span class="stat-label">Total Pacientes:</span>
-                <span class="stat-value" id="statTotal">0</span>
-            </div>
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-label">Fila Normal:</span>
+          <span class="stat-value" id="statNormal">0</span>
         </div>
+        <div class="stat">
+          <span class="stat-label">Fila Prioritária:</span>
+          <span class="stat-value" id="statPrioritaria">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Atendidos:</span>
+          <span class="stat-value" id="statAtendidos">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Total Pacientes:</span>
+          <span class="stat-value" id="statTotal">0</span>
+        </div>
+      </div>
 
-        <main class="main-content">
-            <section class="form-section">
-                <h2>Inserir Paciente</h2>
-                <form id="pacienteForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nome">Nome:</label>
-                            <input type="text" id="nome" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="idade">Idade:</label>
-                            <input type="number" id="idade" required min="0">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="bi">BI:</label>
-                            <input type="text" id="bi" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="telefone">Telefone:</label>
-                            <input type="text" id="telefone" required>
-                        </div>
-                    </div>
-                    <div class="form-group full-width">
-                        <label for="endereco">Endereço:</label>
-                        <input type="text" id="endereco" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="prioridade">Prioridade:</label>
-                        <select id="prioridade" required>
-                            <option value="normal">Normal</option>
-                            <option value="prioritario">Prioritário</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Inserir Paciente</button>
-                </form>
-            </section>
+      <main class="main-content">
+        <section class="form-section">
+          <h2>Inserir Paciente</h2>
+          <form id="pacienteForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" required />
+              </div>
+              <div class="form-group">
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" required min="0" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="bi">BI:</label>
+                <input type="text" id="bi" required />
+              </div>
+              <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" required />
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label for="endereco">Endereço:</label>
+              <input type="text" id="endereco" required />
+            </div>
+            <div class="form-group">
+              <label for="prioridade">Prioridade:</label>
+              <select id="prioridade" required>
+                <option value="normal">Normal</option>
+                <option value="prioritario">Prioritário</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Inserir Paciente
+            </button>
+          </form>
+        </section>
 
-            <section class="action-section">
-                <h2>Ações</h2>
-                <div class="action-buttons">
-                    <button class="btn btn-success" onclick="atenderProximo()">Atender Próximo</button>
-                    <button class="btn btn-warning" onclick="desfazer()">Desfazer</button>
-                    <button class="btn btn-info" onclick="buscarPaciente()">Buscar por ID</button>
-                    <button class="btn btn-danger" onclick="removerPaciente()">Remover por ID</button>
-                    <button class="btn btn-secondary" onclick="limparHistorico()">Limpar Histórico</button>
-                </div>
-            </section>
+        <section class="action-section">
+          <h2>Ações</h2>
+          <div class="action-buttons">
+            <button class="btn btn-success" onclick="atenderProximo()">
+              Atender Próximo
+            </button>
+            <button class="btn btn-warning" onclick="desfazer()">
+              Desfazer
+            </button>
+            <button class="btn btn-info" onclick="buscarPaciente()">
+              Buscar por ID
+            </button>
+            <button class="btn btn-danger" onclick="removerPaciente()">
+              Remover por ID
+            </button>
+            <button class="btn btn-secondary" onclick="limparHistorico()">
+              Limpar Histórico
+            </button>
+          </div>
+        </section>
 
-            <section class="lists-section">
-                <div class="list-panel">
-                    <h2>Fila Normal</h2>
-                    <ul id="filaNormal" class="patient-list"></ul>
-                </div>
-                <div class="list-panel">
-                    <h2>Fila Prioritária</h2>
-                    <ul id="filaPrioritaria" class="patient-list"></ul>
-                </div>
-                <div class="list-panel">
-                    <h2>Histórico</h2>
-                    <ul id="historico" class="patient-list"></ul>
-                </div>
-            </section>
-        </main>
+        <section class="lists-section">
+          <div class="list-panel">
+            <h2>Fila Normal</h2>
+            <ul id="filaNormal" class="patient-list"></ul>
+          </div>
+          <div class="list-panel">
+            <h2>Fila Prioritária</h2>
+            <ul id="filaPrioritaria" class="patient-list"></ul>
+          </div>
+          <div class="list-panel">
+            <h2>Histórico</h2>
+            <ul id="historico" class="patient-list"></ul>
+          </div>
+        </section>
+      </main>
 
-        <div id="message" class="message"></div>
+      <div id="message" class="message"></div>
     </div>
 
     <script src="js/app.js"></script>
-</body>
+  </body>
 </html>

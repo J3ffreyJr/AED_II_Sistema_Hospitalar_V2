@@ -51,6 +51,7 @@ public class Atendimento {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        return "Atendimento{paciente=" + paciente.getNome() + ", dataHora=" + dataHora.format(formatter) + ", tipo=" + tipo + '}';
+        return "Atendimento{paciente=" + paciente.getNome() + ", dataHora=" + dataHora.format(formatter) + ", tipo="
+                + tipo + '}';
     }
 }

@@ -62,13 +62,8 @@ public class ListaDuplamenteLigada {
         return null;
     }
 
-    public boolean isEmpty() {
-        return inicio == null;
-    }
-
-    public int getTamanho() {
-        return tamanho;
-    }
+    public boolean isEmpty() { return inicio == null; }
+    public int getTamanho() { return tamanho; }
 
     public List<Paciente> listarTodos() {
         List<Paciente> lista = new ArrayList<>();

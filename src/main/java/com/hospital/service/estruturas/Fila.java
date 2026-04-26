@@ -2,9 +2,6 @@ package com.hospital.service.estruturas;
 
 import com.hospital.model.Paciente;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Fila {
     private NoFila inicio;
     private NoFila fim;
@@ -62,7 +59,8 @@ public class Fila {
     }
 
     public Paciente removerPorId(int id) {
-        if (isEmpty()) return null;
+        if (isEmpty())
+            return null;
 
         if (inicio.getPaciente().getId() == id) {
             return dequeue();
@@ -124,8 +122,8 @@ public class Fila {
         tamanho++;
     }
 
-    public List<Paciente> listarTodos() {
-        List<Paciente> lista = new ArrayList<>();
+    public java.util.List<Paciente> listarTodos() {
+        java.util.List<Paciente> lista = new java.util.ArrayList<>();
         if (isEmpty()) {
             return lista;
         }

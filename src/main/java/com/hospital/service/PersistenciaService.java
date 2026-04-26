@@ -29,7 +29,7 @@ public class PersistenciaService {
      * Salva a lista de pacientes em um arquivo TXT
      */
     public void salvarPacientes(List<Paciente> filaNormal, List<Paciente> filaPrioritaria,
-                                List<Paciente> historico, int proximoId) {
+            List<Paciente> historico, int proximoId) {
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(ARQUIVO_PACIENTES), StandardCharsets.UTF_8))) {
 
@@ -237,7 +237,7 @@ public class PersistenciaService {
         public int proximoId;
 
         public PacientesCarregados(List<Paciente> filaNormal, List<Paciente> filaPrioritaria,
-                                   List<Paciente> historico, int proximoId) {
+                List<Paciente> historico, int proximoId) {
             this.filaNormal = filaNormal;
             this.filaPrioritaria = filaPrioritaria;
             this.historico = historico;

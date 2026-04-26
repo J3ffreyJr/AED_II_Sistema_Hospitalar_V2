@@ -27,8 +27,10 @@ public class HeapPrioridade {
     private boolean temMaiorPrioridade(Paciente p1, Paciente p2) {
         boolean p1Idoso = p1.getIdade() >= 60;
         boolean p2Idoso = p2.getIdade() >= 60;
-        if (p1Idoso && !p2Idoso) return true;
-        if (!p1Idoso && p2Idoso) return false;
+        if (p1Idoso && !p2Idoso)
+            return true;
+        if (!p1Idoso && p2Idoso)
+            return false;
         return p1.getIdade() > p2.getIdade();
     }
 
@@ -52,7 +54,8 @@ public class HeapPrioridade {
     }
 
     public Paciente remover() {
-        if (isEmpty()) return null;
+        if (isEmpty())
+            return null;
         Paciente maisPrioritario = heap.get(0);
         Paciente ultimo = heap.remove(heap.size() - 1);
         if (!heap.isEmpty()) {

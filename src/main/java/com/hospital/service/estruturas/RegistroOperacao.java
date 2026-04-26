@@ -1,7 +1,6 @@
 package com.hospital.service.estruturas;
 
 import com.hospital.model.Paciente;
-
 import java.time.LocalDateTime;
 
 public class RegistroOperacao {

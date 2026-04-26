@@ -93,8 +93,7 @@ public class PacienteController {
         sistema.limparHistorico();
         return ResponseEntity.ok(Map.of(
                 "sucesso", true,
-                "mensagem", "Histórico limpo com sucesso"
-        ));
+                "mensagem", "Histórico limpo com sucesso"));
     }
 
     @GetMapping("/estatisticas")

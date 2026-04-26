@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 
 @Service
 public class SistemaAtendimento {
@@ -85,14 +83,14 @@ public class SistemaAtendimento {
                     filaNormal.listarTodos(),
                     filaPrioritaria.listarTodos(),
                     historico.listarTodos(),
-                    contadorId
-            );
+                    contadorId);
         }
     }
 
     public Paciente criarPaciente(PacienteRequest request) {
-        return new Paciente(contadorId++, request.getNome(), request.getIdade(),
+        Paciente p = new Paciente(contadorId++, request.getNome(), request.getIdade(),
                 request.getBi(), request.getTelefone(), request.getEndereco(), request.getPrioridade());
+        return p;
     }
 
     public void inserirPaciente(Paciente p) {
@@ -149,7 +147,7 @@ public class SistemaAtendimento {
         String filaPosicao = "";
 
         // Tenta remover da fila normal
-        List<Paciente> filaNormalLista = filaNormal.listarTodos();
+        java.util.List<Paciente> filaNormalLista = filaNormal.listarTodos();
         for (int i = 0; i < filaNormalLista.size(); i++) {
             if (filaNormalLista.get(i).getId() == id) {
                 posicaoOriginal = i;
@@ -162,7 +160,7 @@ public class SistemaAtendimento {
 
         // Se não encontrou na fila normal, tenta na prioritária
         if (paciente == null) {
-            List<Paciente> filaPrioritariaLista = filaPrioritaria.listarTodos();
+            java.util.List<Paciente> filaPrioritariaLista = filaPrioritaria.listarTodos();
             for (int i = 0; i < filaPrioritariaLista.size(); i++) {
                 if (filaPrioritariaLista.get(i).getId() == id) {
                     posicaoOriginal = i;
@@ -247,15 +245,15 @@ public class SistemaAtendimento {
         return true;
     }
 
-    public List<Paciente> listarFilaNormal() {
+    public java.util.List<Paciente> listarFilaNormal() {
         return filaNormal.listarTodos();
     }
 
-    public List<Paciente> listarFilaPrioritaria() {
+    public java.util.List<Paciente> listarFilaPrioritaria() {
         return filaPrioritaria.listarTodos();
     }
 
-    public List<Paciente> listarHistorico() {
+    public java.util.List<Paciente> listarHistorico() {
         return historico.listarTodos();
     }
 
@@ -264,7 +262,7 @@ public class SistemaAtendimento {
         salvarDados();
     }
 
-    public List<Paciente> listarHistoricoOrdenado(String criterio) {
+    public java.util.List<Paciente> listarHistoricoOrdenado(String criterio) {
         List<Paciente> lista = historico.listarTodos();
         switch (criterio) {
             case "nome":
@@ -288,8 +286,7 @@ public class SistemaAtendimento {
                 filaNormal.getTamanho(),
                 filaPrioritaria.getTamanho(),
                 historico.getTamanho(),
-                pilhaDesfazer.getTamanho()
-        );
+                pilhaDesfazer.getTamanho());
     }
 
     public int getProximoId() {
@@ -301,7 +298,7 @@ public class SistemaAtendimento {
         return pilhaRefazer;
     }
 
-    public Queue<RegistroOperacao> getFilaOperacoesDesfeitas() {
+    public java.util.Queue<RegistroOperacao> getFilaOperacoesDesfeitas() {
         return filaOperacoesDesfeitas;
     }
 
@@ -309,7 +306,7 @@ public class SistemaAtendimento {
         return filaOperacoesDesfeitas.size();
     }
 
-    public List<RegistroOperacao> listarOperacoesDesfeitas() {
-        return new ArrayList<>(filaOperacoesDesfeitas);
+    public java.util.List<RegistroOperacao> listarOperacoesDesfeitas() {
+        return new java.util.ArrayList<>(filaOperacoesDesfeitas);
     }
 }

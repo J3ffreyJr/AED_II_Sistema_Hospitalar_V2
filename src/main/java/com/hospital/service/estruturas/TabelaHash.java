@@ -35,7 +35,8 @@ public class TabelaHash {
         int indice = funcaoHash(id);
         EntradaHash atual = tabela[indice];
         while (atual != null) {
-            if (atual.getChave() == id) return atual.getValor();
+            if (atual.getChave() == id)
+                return atual.getValor();
             atual = atual.getProximo();
         }
         return null;
@@ -44,7 +45,8 @@ public class TabelaHash {
     public void remover(int id) {
         int indice = funcaoHash(id);
         EntradaHash atual = tabela[indice];
-        if (atual == null) return;
+        if (atual == null)
+            return;
 
         EntradaHash anterior = null;
         while (atual != null) {
