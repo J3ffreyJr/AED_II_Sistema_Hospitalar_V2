@@ -13,10 +13,27 @@ public class NoFila {
         this.anterior = null;
     }
 
-    public Paciente getPaciente() { return paciente; }
-    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
-    public NoFila getProximo() { return proximo; }
-    public void setProximo(NoFila proximo) { this.proximo = proximo; }
-    public NoFila getAnterior() { return anterior; }
-    public void setAnterior(NoFila anterior) { this.anterior = anterior; }
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public NoFila getProximo() {
+        return proximo;
+    }
+
+    public void setProximo(NoFila proximo) {
+        this.proximo = proximo;
+    }
+
+    public NoFila getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(NoFila anterior) {
+        this.anterior = anterior;
+    }
 }

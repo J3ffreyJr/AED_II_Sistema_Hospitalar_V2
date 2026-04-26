@@ -13,7 +13,15 @@ public class AtendimentoResponse {
         this.tipo = tipo;
     }
 
-    public Paciente getPaciente() { return paciente; }
-    public String getDataHora() { return dataHora; }
-    public String getTipo() { return tipo; }
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public String getDataHora() {
+        return dataHora;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
 }

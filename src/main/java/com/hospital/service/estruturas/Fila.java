@@ -2,6 +2,9 @@ package com.hospital.service.estruturas;
 
 import com.hospital.model.Paciente;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Fila {
     private NoFila inicio;
     private NoFila fim;
@@ -111,7 +114,7 @@ public class Fila {
         // Insere na posição específica
         NoFila novo = new NoFila(paciente);
         NoFila atual = inicio;
-        
+
         for (int i = 0; i < posicao - 1; i++) {
             atual = atual.getProximo();
         }
@@ -121,8 +124,8 @@ public class Fila {
         tamanho++;
     }
 
-    public java.util.List<Paciente> listarTodos() {
-        java.util.List<Paciente> lista = new java.util.ArrayList<>();
+    public List<Paciente> listarTodos() {
+        List<Paciente> lista = new ArrayList<>();
         if (isEmpty()) {
             return lista;
         }

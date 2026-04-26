@@ -62,6 +62,11 @@ public class TabelaHash {
         }
     }
 
-    public boolean contem(int id) { return buscar(id) != null; }
-    public int getTamanho() { return tamanho; }
+    public boolean contem(int id) {
+        return buscar(id) != null;
+    }
+
+    public int getTamanho() {
+        return tamanho;
+    }
 }

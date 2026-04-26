@@ -28,7 +28,7 @@ public class PersistenciaService {
     /**
      * Salva a lista de pacientes em um arquivo TXT
      */
-    public void salvarPacientes(List<Paciente> filaNormal, List<Paciente> filaPrioritaria, 
+    public void salvarPacientes(List<Paciente> filaNormal, List<Paciente> filaPrioritaria,
                                 List<Paciente> historico, int proximoId) {
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(ARQUIVO_PACIENTES), StandardCharsets.UTF_8))) {
@@ -81,7 +81,7 @@ public class PersistenciaService {
      */
     private String formatarPaciente(Paciente p) {
         return String.format("ID=%d|NOME=%s|IDADE=%d|BI=%s|TELEFONE=%s|ENDERECO=%s|PRIORIDADE=%s|REMOVIDO=%s\n",
-                p.getId(), p.getNome(), p.getIdade(), p.getBi(), p.getTelefone(), 
+                p.getId(), p.getNome(), p.getIdade(), p.getBi(), p.getTelefone(),
                 p.getEndereco(), p.getPrioridade(), p.isRemovido());
     }
 
@@ -133,8 +133,8 @@ public class PersistenciaService {
                 }
 
                 // Ignora cabeçalho e linhas vazias
-                if (linha.startsWith("===") || linha.startsWith("---") || linha.equals("[Vazia]") || 
-                    linha.equals("[Vazio]")) {
+                if (linha.startsWith("===") || linha.startsWith("---") || linha.equals("[Vazia]") ||
+                        linha.equals("[Vazio]")) {
                     continue;
                 }
 
@@ -155,7 +155,7 @@ public class PersistenciaService {
                 }
             }
 
-            System.out.println("Dados carregados com sucesso: " + 
+            System.out.println("Dados carregados com sucesso: " +
                     (filaNormal.size() + filaPrioritaria.size()) + " pacientes em filas, " +
                     historico.size() + " no histórico");
 
@@ -237,7 +237,7 @@ public class PersistenciaService {
         public int proximoId;
 
         public PacientesCarregados(List<Paciente> filaNormal, List<Paciente> filaPrioritaria,
-                                  List<Paciente> historico, int proximoId) {
+                                   List<Paciente> historico, int proximoId) {
             this.filaNormal = filaNormal;
             this.filaPrioritaria = filaPrioritaria;
             this.historico = historico;

@@ -12,9 +12,17 @@ public class HeapPrioridade {
         this.heap = new ArrayList<>();
     }
 
-    private int getPai(int index) { return (index - 1) / 2; }
-    private int getFilhoEsquerdo(int index) { return 2 * index + 1; }
-    private int getFilhoDireito(int index) { return 2 * index + 2; }
+    private int getPai(int index) {
+        return (index - 1) / 2;
+    }
+
+    private int getFilhoEsquerdo(int index) {
+        return 2 * index + 1;
+    }
+
+    private int getFilhoDireito(int index) {
+        return 2 * index + 2;
+    }
 
     private boolean temMaiorPrioridade(Paciente p1, Paciente p2) {
         boolean p1Idoso = p1.getIdade() >= 60;
@@ -101,8 +109,13 @@ public class HeapPrioridade {
         return null;
     }
 
-    public boolean isEmpty() { return heap.isEmpty(); }
-    public int getTamanho() { return heap.size(); }
+    public boolean isEmpty() {
+        return heap.isEmpty();
+    }
+
+    public int getTamanho() {
+        return heap.size();
+    }
 
     public List<Paciente> listarTodos() {
         return new ArrayList<>(heap);

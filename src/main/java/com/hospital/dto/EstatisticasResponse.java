@@ -13,8 +13,19 @@ public class EstatisticasResponse {
         this.operacoesUndo = operacoesUndo;
     }
 
-    public int getFilaNormalSize() { return filaNormalSize; }
-    public int getFilaPrioritariaSize() { return filaPrioritariaSize; }
-    public int getTotalAtendidos() { return totalAtendidos; }
-    public int getOperacoesUndo() { return operacoesUndo; }
+    public int getFilaNormalSize() {
+        return filaNormalSize;
+    }
+
+    public int getFilaPrioritariaSize() {
+        return filaPrioritariaSize;
+    }
+
+    public int getTotalAtendidos() {
+        return totalAtendidos;
+    }
+
+    public int getOperacoesUndo() {
+        return operacoesUndo;
+    }
 }

@@ -1,6 +1,7 @@
 package com.hospital.service.estruturas;
 
 import com.hospital.model.Paciente;
+
 import java.time.LocalDateTime;
 
 public class RegistroOperacao {
@@ -20,16 +21,43 @@ public class RegistroOperacao {
         this.criterioOrdenacao = "entrada";
     }
 
-    public Paciente getPaciente() { return paciente; }
-    public String getTipo() { return tipo; }
-    public String getFilaOrigem() { return filaOrigem; }
-    public LocalDateTime getTimestamp() { return timestamp; }
-    public int getPosicaoOriginal() { return posicaoOriginal; }
-    public String getCriterioOrdenacao() { return criterioOrdenacao; }
+    public Paciente getPaciente() {
+        return paciente;
+    }
 
-    public void setPosicaoOriginal(int posicao) { this.posicaoOriginal = posicao; }
-    public void setCriterioOrdenacao(String criterio) { this.criterioOrdenacao = criterio; }
+    public String getTipo() {
+        return tipo;
+    }
 
-    public boolean isRemovido() { return "removido".equals(tipo); }
-    public boolean isAtendido() { return "atendido".equals(tipo); }
+    public String getFilaOrigem() {
+        return filaOrigem;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public int getPosicaoOriginal() {
+        return posicaoOriginal;
+    }
+
+    public String getCriterioOrdenacao() {
+        return criterioOrdenacao;
+    }
+
+    public void setPosicaoOriginal(int posicao) {
+        this.posicaoOriginal = posicao;
+    }
+
+    public void setCriterioOrdenacao(String criterio) {
+        this.criterioOrdenacao = criterio;
+    }
+
+    public boolean isRemovido() {
+        return "removido".equals(tipo);
+    }
+
+    public boolean isAtendido() {
+        return "atendido".equals(tipo);
+    }
 }

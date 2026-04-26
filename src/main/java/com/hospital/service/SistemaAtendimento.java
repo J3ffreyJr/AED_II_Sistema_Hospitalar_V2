@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 @Service
 public class SistemaAtendimento {
@@ -46,7 +48,7 @@ public class SistemaAtendimento {
         }
 
         PersistenciaService.PacientesCarregados dados = persistenciaService.carregarPacientes();
-        
+
         // Carrega pacientes da fila normal
         if (dados.filaNormal != null) {
             for (Paciente p : dados.filaNormal) {
@@ -89,9 +91,8 @@ public class SistemaAtendimento {
     }
 
     public Paciente criarPaciente(PacienteRequest request) {
-        Paciente p = new Paciente(contadorId++, request.getNome(), request.getIdade(),
+        return new Paciente(contadorId++, request.getNome(), request.getIdade(),
                 request.getBi(), request.getTelefone(), request.getEndereco(), request.getPrioridade());
-        return p;
     }
 
     public void inserirPaciente(Paciente p) {
@@ -102,7 +103,7 @@ public class SistemaAtendimento {
         } else {
             filaNormal.enqueue(p);
         }
-        
+
         salvarDados();
     }
 
@@ -148,7 +149,7 @@ public class SistemaAtendimento {
         String filaPosicao = "";
 
         // Tenta remover da fila normal
-        java.util.List<Paciente> filaNormalLista = filaNormal.listarTodos();
+        List<Paciente> filaNormalLista = filaNormal.listarTodos();
         for (int i = 0; i < filaNormalLista.size(); i++) {
             if (filaNormalLista.get(i).getId() == id) {
                 posicaoOriginal = i;
@@ -156,9 +157,9 @@ public class SistemaAtendimento {
                 break;
             }
         }
-        
+
         paciente = filaNormal.removerPorId(id);
-        
+
         // Se não encontrou na fila normal, tenta na prioritária
         if (paciente == null) {
             java.util.List<Paciente> filaPrioritariaLista = filaPrioritaria.listarTodos();
@@ -193,13 +194,13 @@ public class SistemaAtendimento {
         }
 
         RegistroOperacao registro = pilhaDesfazer.pop();
-        
+
         // Inserir na pilha auxiliar (refazer)
         pilhaRefazer.push(registro);
-        
+
         // Inserir na fila de operações desfeitas
         filaOperacoesDesfeitas.offer(registro);
-        
+
         Paciente paciente = registro.getPaciente();
 
         // Remove do histórico
@@ -224,10 +225,10 @@ public class SistemaAtendimento {
         }
 
         RegistroOperacao registro = pilhaRefazer.pop();
-        
+
         // Reinsere na pilha de desfazer
         pilhaDesfazer.push(registro);
-        
+
         Paciente paciente = registro.getPaciente();
 
         // Remove da fila
@@ -239,22 +240,22 @@ public class SistemaAtendimento {
 
         // Volta para o histórico
         historico.inserir(paciente);
-        
+
         paciente.setRemovido(registro.isRemovido());
         tabela.remover(paciente.getId());
         salvarDados();
         return true;
     }
 
-    public java.util.List<Paciente> listarFilaNormal() {
+    public List<Paciente> listarFilaNormal() {
         return filaNormal.listarTodos();
     }
 
-    public java.util.List<Paciente> listarFilaPrioritaria() {
+    public List<Paciente> listarFilaPrioritaria() {
         return filaPrioritaria.listarTodos();
     }
 
-    public java.util.List<Paciente> listarHistorico() {
+    public List<Paciente> listarHistorico() {
         return historico.listarTodos();
     }
 
@@ -263,7 +264,7 @@ public class SistemaAtendimento {
         salvarDados();
     }
 
-    public java.util.List<Paciente> listarHistoricoOrdenado(String criterio) {
+    public List<Paciente> listarHistoricoOrdenado(String criterio) {
         List<Paciente> lista = historico.listarTodos();
         switch (criterio) {
             case "nome":
@@ -300,7 +301,7 @@ public class SistemaAtendimento {
         return pilhaRefazer;
     }
 
-    public java.util.Queue<RegistroOperacao> getFilaOperacoesDesfeitas() {
+    public Queue<RegistroOperacao> getFilaOperacoesDesfeitas() {
         return filaOperacoesDesfeitas;
     }
 
@@ -308,7 +309,7 @@ public class SistemaAtendimento {
         return filaOperacoesDesfeitas.size();
     }
 
-    public java.util.List<RegistroOperacao> listarOperacoesDesfeitas() {
-        return new java.util.ArrayList<>(filaOperacoesDesfeitas);
+    public List<RegistroOperacao> listarOperacoesDesfeitas() {
+        return new ArrayList<>(filaOperacoesDesfeitas);
     }
 }
