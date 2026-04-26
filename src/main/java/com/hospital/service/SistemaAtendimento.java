@@ -162,7 +162,7 @@ public class SistemaAtendimento {
 
         // Se não encontrou na fila normal, tenta na prioritária
         if (paciente == null) {
-            java.util.List<Paciente> filaPrioritariaLista = filaPrioritaria.listarTodos();
+            List<Paciente> filaPrioritariaLista = filaPrioritaria.listarTodos();
             for (int i = 0; i < filaPrioritariaLista.size(); i++) {
                 if (filaPrioritariaLista.get(i).getId() == id) {
                     posicaoOriginal = i;
